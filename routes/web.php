@@ -24,6 +24,7 @@ Route::get('makanan', 'makananController@index');
 /**
  * Todo Route
  */
+Route::get('todo/json','todoController@json');
 Route::get('todo', 'todoController@index');
 Route::get('todo/create', 'todoController@create');
 Route::post('todo', 'todoController@store');
@@ -34,6 +35,8 @@ Route::delete('todo/{id}','todoController@destroy');
 /**
  * Category Route
  */
+Route::get('category/test','TestController@index');
+Route::get('category/json','categoryController@json');
 Route::get('category', 'categoryController@index');
 Route::get('category/create', 'categoryController@create');
 Route::post('category', 'categoryController@store');
@@ -47,3 +50,6 @@ Route::post('user', 'userController@store');
 Route::get('user/{id}/edit','userController@edit');
 Route::put('user/{id}','userController@update');
 Route::delete('user/{id}','userController@destroy');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -9,29 +9,43 @@
             <strong>Success!</strong> {{ Session('message')}}
         </div>
         @else @endif
-        <table class="table table-bordered">
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Create At</th>
-                <th width="135">Action</th>
-            </tr>
-            @foreach($todos as $todo)
-            <tr>
-                <td>{{ $todo->title }}</td>
-                <td>{{ $todo->description }}</td>
-                <td>{{ $todo->created_at }}</td>
-                <td>
-                    {{ link_to('todo/'.$todo->id.'/edit','Edit',['class'=>'btn btn-info']) }} 
-                    {{ Form::open(['url'=>'todo/'.$todo->id.'','method'=>'delete','style'=>'float:right',"onclick"=>"return confirm('Are you sure you want to delete this Todo')"]) }} 
-                    {{ Form::submit('Delete',['class'=>'btn btn-success']) }} 
-                    {{ Form::close() }}
-                </td>
-            </tr>
-            @endforeach
+        <table id="users-table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Images</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Create At</th>
+                    <th>Update At</th>
+                    <th width="135">Action</th>
+                </tr>
+            </thead>            
         </table>
-        <hr>
+        <hr>        
         <a href="/todo/create" class="btn btn-danger btn-sm">Create New Todo</a>
     </div>
 </div>
 @endsection()
+
+
+@push('scripts')
+<script>
+$(function() {
+    $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: 'todo/json',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'image', name: 'image'},
+            { data: 'title', name: 'title' },
+            { data: 'description', name: 'description' },
+            { data: 'created_at', name: 'created_at' },
+            { data: 'updated_at', name: 'updated_at' },
+            { data: 'action', name: 'action' }
+        ]
+    });
+});
+</script>
+@endpush

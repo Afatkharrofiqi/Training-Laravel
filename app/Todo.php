@@ -18,4 +18,8 @@ class Todo extends Model
     function getTitleAttribute($value){
         return strtoupper($value);
     }
+
+    function category(){
+        return $this->belongsTo('App\Category');
+    }
 }

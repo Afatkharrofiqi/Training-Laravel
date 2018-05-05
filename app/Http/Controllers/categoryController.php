@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 
 class categoryController extends Controller
 {
     public function index(){
-        $data['listCategory'] = array('Makanan','Minuman');
+        $data['listCategory'] = Category::all();
         return view('category.index',$data);
     }
     
@@ -19,6 +20,9 @@ class categoryController extends Controller
         $request->validate([
             'category' => 'required|min:3'
         ]);
-        return $request->category;
+        $category = new Category;
+        $category->name = $request->category;
+        $category->save();
+        return redirect('/category');
     }
 }

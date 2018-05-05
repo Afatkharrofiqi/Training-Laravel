@@ -27,6 +27,9 @@ Route::get('makanan', 'makananController@index');
 Route::get('todo', 'todoController@index');
 Route::get('todo/create', 'todoController@create');
 Route::post('todo', 'todoController@store');
+Route::get('todo/{id}/edit','todoController@edit');
+Route::put('todo/{id}','todoController@update');
+Route::delete('todo/{id}','todoController@destroy');
 
 /**
  * Category Route
@@ -41,3 +44,6 @@ Route::post('category', 'categoryController@store');
 Route::get('user','userController@index');
 Route::get('user/create','userController@create');
 Route::post('user', 'userController@store');
+Route::get('user/{id}/edit','userController@edit');
+Route::put('user/{id}','userController@update');
+Route::delete('user/{id}','userController@destroy');
